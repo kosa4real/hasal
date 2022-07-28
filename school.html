@@ -11,18 +11,33 @@
     <script type="text/javascript">
       // let btn = document.getElementById('btn')
 
+  window.addEventListener('load', (event) => {
+      // alert('page is fully loaded');
+      var length = 15;
+      var result = '';
+      var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() *
+                                               charactersLength));
+      }
+      console.log(result)
+     document.getElementById('trnx').value = result;
+  });
+
+
+
+
       function postData (){
         let amount = document.getElementById('amount').value
         let trnx = document.getElementById('trnx').value
         let zcode = document.getElementById('zcode').value
         let mobile = document.getElementById('mobile').value
         let email = document.getElementById('email').value
+        let callback = document.getElementById('callback').value
 
-        console.log(amount);
-        console.log(trnx);
-        console.log(zcode);
-        console.log(email);
-        console.log(mobile);
+
+
 
         const headers = {
           "Content-Type": "application/json",
@@ -35,14 +50,18 @@
           // "mobileNumber": "08068869098",
           // "zainboxCode": "THbfnDvK5o",
           // "emailAddress": "info@betastack.ng"
+          // "successCallBackUrl": "https://kano.com",
+        	// "failureCallBackUrl": "https://kanonia.com"
 
           "amount":amount,
           "txnRef" : trnx,
           "mobileNumber": mobile,
           "zainboxCode": zcode,
-          "emailAddress": email
+          "emailAddress": email,
+        	"successCallBackUrl": "https://kano.com",
+        	"failureCallBackUrl": "https://kosa4real.github.io/school.html"
+
         }
-        console.log("hello")
         console.log(PostData)
         axios.post('https://sandbox.zainpay.ng/zainbox/card/initialize/payment', PostData, {
            headers: headers
@@ -50,7 +69,9 @@
        .then((response) => {
            // string.replace('find1', 'replace1').replace('find2', 'replace2');
            console.log(response);
-           var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://sandbox.kigra.gov.ng:8065/merchant/redirect-payment")
+           var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://localhost:8081/merchant/redirect-payment")
+          //  var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://sandbox.kigra.gov.ng:8065/merchant/redirect-payment")
+
            window.location.replace(url)
        }, (error) => {
            console.log(error);
@@ -63,14 +84,16 @@
       <div class="row">
         <div class="col-md-offset-2 col-md-8">
           <h1 class="text-center">Hassal Honey</h1>
-          <div class="form-group">
+
+          <form action="" target="_blank">
+            <div class="form-group">
             <label for="amount">Amount</label>
             <input type="text" class="form-control" name="" value="100" id="amount" disabled>
           </div>
 
           <div class="form-group">
             <label for="trnx">Transaction Code</label>
-            <input type="text" class="form-control" name="" value="QwL831r09TaL7L111951" id="trnx">
+            <input type="text" class="form-control" name=""  id="trnx">
           </div>
 
 
@@ -89,7 +112,13 @@
             <input type="email" class="form-control" name="" value="info@betastack.ng" id="email" disabled>
           </div>
 
+          <div class="form-group">
+            <label for="zcode">Callback</label>
+            <input type="text" class="form-control" name="" value="http://kano.com" id="callback" disabled>
+          </div>
+
           <button onclick="postData()" class="btn btn-primary" type="button" id="btn" name="button">Submit</button>
+          </form>
         </div>
       </div>
     </div>
