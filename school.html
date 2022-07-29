@@ -71,8 +71,8 @@
        .then((response) => {
            // string.replace('find1', 'replace1').replace('find2', 'replace2');
            console.log(response);
-           var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://localhost:8081/merchant/redirect-payment")
-          //  var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://sandbox.kigra.gov.ng:8065/merchant/redirect-payment")
+          //  var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://localhost:8081/merchant/redirect-payment")
+           var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://sandbox.kigra.gov.ng:8065/merchant/redirect-payment")
 
            window.location.replace(url)
        }, (error) => {
