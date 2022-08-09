@@ -34,8 +34,7 @@
         let zcode = document.getElementById('zcode').value
         let mobile = document.getElementById('mobile').value
         let email = document.getElementById('email').value
-        let flcallback = document.getElementById('failureCB').value
-        let sscallback = document.getElementById('successCB').value
+        let callBackUrl = document.getElementById('callBackUrl').value
 
 
 
@@ -60,9 +59,7 @@
           "mobileNumber": mobile,
           "zainboxCode": zcode,
           "emailAddress": email,
-        	"successCallBackUrl": "https://kosa4real.github.io/hasal/success",
-        	"failureCallBackUrl": "https://kosa4real.github.io/hasal/school"
-
+        	"callBackUrl": callBackUrl,
         }
         console.log(PostData)
         axios.post('https://sandbox.zainpay.ng/zainbox/card/initialize/payment', PostData, {
@@ -72,7 +69,10 @@
            // string.replace('find1', 'replace1').replace('find2', 'replace2');
            console.log(response);
           //  var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://localhost:8081/merchant/redirect-payment")
-           var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://sandbox.kigra.gov.ng:8065/merchant/redirect-payment")
+           // var url= response.data.data.replace("https://card.zainpay.ng/index.php", "https://zainpay.schoolmanager.info/merchant/redirect-payment")
+
+          //  var url= response.data.data.replace("https://card.zainpay.ng/index.php", "http://sandbox.kigra.gov.ng:8065/merchant/redirect-payment")
+           var url= response.data.data.replace("https://card.zainpay.ng/index.php", "https://dev.zainpay.ng/merchant/redirect-payment")
 
            window.location.replace(url)
        }, (error) => {
@@ -115,14 +115,10 @@
           </div>
 
           <div class="form-group">
-            <label for="failureCB">Failure Callback</label>
-            <input type="text" class="form-control" name="" value="https://kosa4real.github.io/hasal/school" id="failureCB" disabled>
+            <label for="failureCB">Callback</label>
+            <input type="text" class="form-control" name="" value="https://kosa4real.github.io/hasal/school" id="callBackUrl" disabled>
           </div>
 
-           <div class="form-group">
-            <label for="successCB">Success Callback</label>
-            <input type="text" class="form-control" name="" value="https://kosa4real.github.io/hasal/success" id="successCB" disabled>
-          </div>
 
           <button onclick="postData()" class="btn btn-primary" type="button" id="btn" name="button">Submit</button>
           </form>
